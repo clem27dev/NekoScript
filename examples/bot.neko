@@ -1,18 +1,33 @@
 
-// Exemple de bot Discord en NekoScript
-discordNeko.connexion("TON_TOKEN_ICI")
+const NekoBot = new DiscordNeko({
+  prefix: '?' // Choisir un préfix personnalisé
+});
 
-// Commandes du bot
-nekoCommande("bonjour", "Bonjour! Je suis un bot NekoScript! 🐱")
-nekoCommande("aide", "Voici les commandes disponibles: !bonjour, !aide")
+NekoBot.nekConnexion('TON_TOKEN');
 
-// Réactions aux messages
-nekoReagit("J'aime les chats", "🐱")
+// Commande avec embed
+NekoBot.nekCommande('info', 'Affiche les infos du serveur', (message) => {
+  const embed = NekoBot.nekEmbed()
+    .setTitle('Information du Serveur')
+    .setDescription('Voici les informations du serveur')
+    .addField('Nom', message.guild.name)
+    .addField('Membres', message.guild.memberCount.toString())
+    .setThumbnail(message.guild.iconURL());
+  
+  NekoBot.nekEnvoiEmbed(message.channel, embed);
+});
 
-// Calculs
-compteneko = 5 plus 3
-compteneko = 10 multiplier 2
+// Commande de modération
+NekoBot.nekCommande('kick', 'Expulser un membre', async (message, args) => {
+  if (!message.member.permissions.has('KICK_MEMBERS')) return;
+  
+  const user = message.mentions.users.first();
+  if (!user) return message.reply('Mentionne un utilisateur!');
+  
+  const member = await NekoBot.nekMembre(message.guild, user.id);
+  await NekoBot.nekExpulser(member, 'Expulsé par commande');
+  message.reply('Membre expulsé!');
+});
 
-// Boucles et conditions
-boucle(3)
-si(true)
+// Changer le statut du bot
+NekoBot.nekChangerPresence('PLAYING', 'avec NekoScript');
