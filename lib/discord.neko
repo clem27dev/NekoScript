@@ -1,23 +1,52 @@
 
-// Discord.neko - Bibliothèque Discord pour NekoScript
 const Discord = require('discord.js');
 
 class DiscordNeko {
-  constructor(token) {
+  constructor() {
     this.client = new Discord.Client();
-    this.token = token;
+    this.commands = new Map();
+    this.prefix = '!';
   }
 
-  nekConnexion() {
-    this.client.login(this.token);
-  }
+  nekConnexion(token) {
+    this.client.login(token);
+    console.log('🐱 Bot connecté!');
+    
+    this.client.on('ready', () => {
+      console.log(`Connecté en tant que ${this.client.user.tag}`);
+    });
 
-  nekMessage(message, reponse) {
-    this.client.on('message', msg => {
-      if (msg.content === message) {
-        msg.channel.send(reponse);
+    this.client.on('message', (message) => {
+      if (!message.content.startsWith(this.prefix)) return;
+      
+      const args = message.content.slice(this.prefix.length).trim().split(/ +/);
+      const command = args.shift().toLowerCase();
+      
+      if (this.commands.has(command)) {
+        const cmd = this.commands.get(command);
+        cmd.execute(message, args);
       }
     });
+  }
+
+  nekCommande(nom, description, execute) {
+    this.commands.set(nom, {
+      name: nom,
+      description: description,
+      execute: execute
+    });
+  }
+
+  nekReaction(message, emoji) {
+    this.client.on('message', msg => {
+      if (msg.content.includes(message)) {
+        msg.react(emoji);
+      }
+    });
+  }
+
+  nekEnvoiMessage(channel, message) {
+    channel.send(message);
   }
 }
 
