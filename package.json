@@ -1,15 +1,27 @@
 {
-  "name": "nodejs",
+  "name": "nekoscript",
   "version": "1.0.0",
-  "description": "",
+  "description": "Language de programmation français simple et créatif",
   "main": "index.js",
+  "bin": {
+    "neko-script": "./cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "nekoscript",
+    "programming-language",
+    "french",
+    "web",
+    "games",
+    "discord-bots"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@types/node": "^22.13.11"
+    "chalk": "^4.1.2",
+    "commander": "^8.3.0",
+    "discord.js": "^12.5.3"
   }
 }

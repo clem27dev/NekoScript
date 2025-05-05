@@ -1,0 +1,24 @@
+
+// Discord.neko - Bibliothèque Discord pour NekoScript
+const Discord = require('discord.js');
+
+class DiscordNeko {
+  constructor(token) {
+    this.client = new Discord.Client();
+    this.token = token;
+  }
+
+  nekConnexion() {
+    this.client.login(this.token);
+  }
+
+  nekMessage(message, reponse) {
+    this.client.on('message', msg => {
+      if (msg.content === message) {
+        msg.channel.send(reponse);
+      }
+    });
+  }
+}
+
+module.exports = DiscordNeko;
