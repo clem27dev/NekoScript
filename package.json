@@ -1,6 +1,6 @@
 {
   "name": "nekoscript-coding",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Language de programmation français simple et créatif",
   "main": "index.js",
   "bin": {
@@ -23,6 +23,7 @@
     "axios": "^1.9.0",
     "chalk": "^4.1.2",
     "commander": "^8.3.0",
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "nekoscript-coding": "^1.0.1"
   }
 }
