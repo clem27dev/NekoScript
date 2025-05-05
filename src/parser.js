@@ -64,7 +64,23 @@ class Parser {
       }
       else if (line.startsWith('si')) {
         const condition = line.match(/\((.+)\)/)[1];
-        ast.push({ type: 'IF', condition });
+        const block = [];
+        let j = i + 1;
+        let depth = 1;
+        
+        while (j < lines.length && depth > 0) {
+          if (lines[j].includes('{')) depth++;
+          if (lines[j].includes('}')) depth--;
+          if (depth > 0) block.push(lines[j]);
+          j++;
+        }
+        
+        ast.push({ 
+          type: 'IF',
+          condition,
+          block: this.parse(block.join('\n'))
+        });
+        i = j - 1;
       }
     }
 
