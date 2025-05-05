@@ -8,8 +8,12 @@ class Interpreter {
   }
 
   async interpret(ast) {
-    for (const node of ast) {
-      await this.executeNode(node);
+    try {
+      for (const node of ast) {
+        await this.executeNode(node);
+      }
+    } catch (error) {
+      console.error('❌ Erreur:', error.message);
     }
   }
 
