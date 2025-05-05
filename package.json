@@ -1,7 +1,7 @@
 {
   "name": "nekoscript-coding",
-  "version": "1.0.1",
-  "description": "Language de programmation français simple et créatif",
+  "version": "1.0.2",
+  "description": "🐱 Language de programmation français simple et créatif🐱",
   "main": "index.js",
   "bin": {
     "neko-script": "./cli.js"
