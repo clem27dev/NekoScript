@@ -1,6 +1,7 @@
 
 #!/usr/bin/env node
-const { program } = require('commander');
+const commander = require('commander');
+const program = new commander.Command();
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
