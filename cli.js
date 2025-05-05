@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 const NekoScript = require('./index');
+const NekoPackageManager = require('./src/package-manager');
 
 program
   .version('1.0.0')
