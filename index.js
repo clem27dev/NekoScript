@@ -2,6 +2,7 @@
 const Parser = require('./src/parser');
 const Interpreter = require('./src/interpreter');
 const DiscordAPI = require('./lib/discord.neko');
+const NekoPackageManager = require('./src/package-manager');
 
 class NekoScript {
   constructor() {
