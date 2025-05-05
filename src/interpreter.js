@@ -25,9 +25,18 @@ class Interpreter {
         break;
 
       case 'DISCORD_CONNECT':
-        this.discord = new Discord.Client();
-        await this.discord.login(node.token);
-        console.log('🐱 Bot Discord connecté!');
+        if (!this.discord) {
+          this.discord = new Discord.Client({
+            intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS']
+          });
+          await this.discord.login(node.token);
+          console.log('🐱 Bot Discord connecté!');
+          
+          // Configuration des événements de base
+          this.discord.on('ready', () => {
+            console.log(`Connecté en tant que ${this.discord.user.tag}`);
+          });
+        }
         break;
 
       case 'DISCORD_COMMAND':
