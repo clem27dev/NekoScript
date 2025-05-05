@@ -18,6 +18,12 @@ class NekoPackageManager {
     try {
       const sourceDir = path.join(this.registryDir, packageName);
       const targetDir = path.join(this.packagesDir, packageName);
+      
+      // Copier le workflow
+      const workflowConfig = path.join(__dirname, '../config/nekoscript.workflow.json');
+      if (fs.existsSync(workflowConfig)) {
+        fs.copyFileSync(workflowConfig, path.join(process.cwd(), '.replit'));
+      }
 
       if (!fs.existsSync(sourceDir)) {
         throw new Error(`Package ${packageName} non trouvé!`);

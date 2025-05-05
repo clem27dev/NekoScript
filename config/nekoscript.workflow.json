@@ -1,0 +1,17 @@
+
+{
+  "workflows": {
+    "runButton": "Run NekoScript",
+    "commands": [
+      {
+        "name": "Run NekoScript",
+        "mode": "sequential",
+        "tasks": [
+          {
+            "command": "npx neko-script executer main.neko"
+          }
+        ]
+      }
+    ]
+  }
+}
