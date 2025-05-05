@@ -24,9 +24,17 @@ program
   .command('executer <fichier>')
   .description('Exécute un fichier NekoScript')
   .action((fichier) => {
-    const neko = new NekoScript();
-    const code = fs.readFileSync(fichier, 'utf-8');
-    neko.execute(code);
+    try {
+      if (!fs.existsSync(fichier)) {
+        console.log(chalk.red(`❌ Le fichier ${fichier} n'existe pas!`));
+        return;
+      }
+      const neko = new NekoScript();
+      const code = fs.readFileSync(fichier, 'utf-8');
+      neko.execute(code);
+    } catch (error) {
+      console.error(chalk.red('❌ Erreur:'), error.message);
+    }
   });
 
 program
@@ -45,9 +53,14 @@ program
 program
   .command('installer <package>')
   .description('Installe un package NekoScript')
-  .action((package) => {
-    console.log(chalk.green(`📥 Installation de ${package}...`));
-    // TODO: Implémenter la logique d'installation
+  .action(async (package) => {
+    try {
+      const pm = new NekoPackageManager();
+      await pm.installPackage(package);
+      console.log(chalk.green(`✅ ${package} installé avec succès!`));
+    } catch (error) {
+      console.error(chalk.red('❌ Erreur:'), error.message);
+    }
   });
 
 program.parse(process.argv);
