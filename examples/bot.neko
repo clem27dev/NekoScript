@@ -1,0 +1,18 @@
+
+// Exemple de bot Discord en NekoScript
+discordNeko.connexion("TON_TOKEN_ICI")
+
+// Commandes du bot
+nekoCommande("bonjour", "Bonjour! Je suis un bot NekoScript! 🐱")
+nekoCommande("aide", "Voici les commandes disponibles: !bonjour, !aide")
+
+// Réactions aux messages
+nekoReagit("J'aime les chats", "🐱")
+
+// Calculs
+compteneko = 5 plus 3
+compteneko = 10 multiplier 2
+
+// Boucles et conditions
+boucle(3)
+si(true)
